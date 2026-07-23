@@ -1,0 +1,207 @@
+<svg viewBox="0 0 600 680" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" class="map-colombia-svg">
+  <defs>
+    <filter id="glow-red-node" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <linearGradient id="colombia-fill-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cc0000" stop-opacity="0.22" />
+      <stop offset="40%" stop-color="#aa0000" stop-opacity="0.14" />
+      <stop offset="100%" stop-color="#400000" stop-opacity="0.06" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .map-grid-line { stroke: rgba(255,255,255,0.04); stroke-width: 1; stroke-dasharray: 4,6; }
+    .colombia-main-path {
+      fill: url(#colombia-fill-grad);
+      stroke: #cc0000;
+      stroke-width: 2;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 10px rgba(204,0,0,0.3));
+      transition: fill 0.3s;
+    }
+    .map-marker-item { cursor: pointer; pointer-events: all; }
+    .hit-area { fill: rgba(0,0,0,0.001); stroke: transparent; cursor: pointer; pointer-events: all; }
+    .map-marker-item:hover .marker-circle-inner, .map-marker-item.active .marker-circle-inner { fill: #ff4d4d; transform: scale(1.4); }
+    .map-marker-item:hover .marker-pulse-ring, .map-marker-item.active .marker-pulse-ring { stroke: #ff4d4d; stroke-width: 2.8; }
+    .marker-circle-inner { transition: transform 0.22s var(--ease, ease), fill 0.22s; transform-origin: center; pointer-events: none; }
+    .marker-pulse-ring { animation: pulseRing 2.2s infinite ease-out; transform-origin: center; pointer-events: none; }
+    .marker-pulse-sede { animation: pulseRingSede 1.7s infinite ease-out; transform-origin: center; pointer-events: none; }
+    
+    @keyframes pulseRing {
+      0% { r: 4px; opacity: 0.85; stroke-width: 1.5px; }
+      70% { r: 14px; opacity: 0.15; stroke-width: 2.5px; }
+      100% { r: 18px; opacity: 0; stroke-width: 0.5px; }
+    }
+    @keyframes pulseRingSede {
+      0% { r: 6px; opacity: 0.95; stroke-width: 2px; }
+      70% { r: 20px; opacity: 0.2; stroke-width: 3.5px; }
+      100% { r: 26px; opacity: 0; stroke-width: 0.5px; }
+    }
+  </style>
+
+  <!-- Background Grid -->
+  <g aria-hidden="true">
+    <line x1="40" y1="120" x2="560" y2="120" class="map-grid-line" />
+    <line x1="40" y1="220" x2="560" y2="220" class="map-grid-line" />
+    <line x1="40" y1="320" x2="560" y2="320" class="map-grid-line" />
+    <line x1="40" y1="420" x2="560" y2="420" class="map-grid-line" />
+    <line x1="40" y1="520" x2="560" y2="520" class="map-grid-line" />
+    <line x1="40" y1="620" x2="560" y2="620" class="map-grid-line" />
+
+    <line x1="120" y1="40" x2="120" y2="650" class="map-grid-line" />
+    <line x1="220" y1="40" x2="220" y2="650" class="map-grid-line" />
+    <line x1="320" y1="40" x2="320" y2="650" class="map-grid-line" />
+    <line x1="420" y1="40" x2="420" y2="650" class="map-grid-line" />
+    <line x1="520" y1="40" x2="520" y2="650" class="map-grid-line" />
+  </g>
+
+  <!-- Colombia Silhouette -->
+  <path d="M 371.3 37.6 L 350.3 52.7 L 308.4 41.4 L 291.6 67.9 L 249.7 83 L 220.3 94.4 L 195.2 109.5 L 182.6 136 L 140.6 173.9 L 115.5 200.4 L 128.1 211.8 L 107.1 234.5 L 111.3 261 L 115.5 298.9 L 111.3 348.1 L 119.7 386 L 56.8 446.6 L 56.8 454.1 L 98.7 476.9 L 140.6 492 L 182.6 514.7 L 224.5 552.6 L 279 590.5 L 350.3 651.1 L 430 666.2 L 434.2 564 L 434.2 450.4 L 518.1 439 L 551.6 363.3 L 518.1 272.4 L 383.9 272.4 L 350.3 242.1 L 329.4 211.8 L 337.7 158.8 L 300 136 L 333.5 71.7 L 371.3 37.6 Z" class="colombia-main-path" />
+
+  <!-- Department & Sede Interactive Nodes -->
+  <g class="map-nodes-layer">
+    <!-- Sede Medellín -->
+    <g class="map-marker-item map-node-sede" data-id="medellin" data-name="Medellín" data-category="Sede Principal" data-desc="Sede Principal — Calle 37c #82a-74" data-cx="191.8" data-cy="270.7" transform="translate(191.8, 270.7)">
+      <!-- 50px Invisible hit target -->
+      <circle cx="0" cy="0" r="28" class="hit-area" />
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#cc0000" class="marker-pulse-sede" />
+      <circle cx="0" cy="0" r="6" fill="#cc0000" class="marker-circle-inner" filter="url(#glow-red-node)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" style="pointer-events:none" />
+    </g>
+    <!-- Sede Bogotá -->
+    <g class="map-marker-item map-node-sede" data-id="bogota" data-name="Bogotá" data-category="Sede Regional Central" data-desc="Sede Regional — Calle 22a Bis A 92-44" data-cx="255" data-cy="328.8" transform="translate(255, 328.8)">
+      <!-- 50px Invisible hit target -->
+      <circle cx="0" cy="0" r="28" class="hit-area" />
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#cc0000" class="marker-pulse-sede" />
+      <circle cx="0" cy="0" r="6" fill="#cc0000" class="marker-circle-inner" filter="url(#glow-red-node)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" style="pointer-events:none" />
+    </g>
+    <!-- Sede Barranquilla -->
+    <g class="map-marker-item map-node-sede" data-id="barranquilla" data-name="Barranquilla" data-category="Sede Regional Norte" data-desc="Sede Regional — Calle 76 #54-11" data-cx="225.3" data-cy="91.8" transform="translate(225.3, 91.8)">
+      <!-- 50px Invisible hit target -->
+      <circle cx="0" cy="0" r="28" class="hit-area" />
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#cc0000" class="marker-pulse-sede" />
+      <circle cx="0" cy="0" r="6" fill="#cc0000" class="marker-circle-inner" filter="url(#glow-red-node)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" style="pointer-events:none" />
+    </g>
+    <!-- Sede Apartadó -->
+    <g class="map-marker-item map-node-sede" data-id="apartado" data-name="Apartadó" data-category="Sede Regional Urabá" data-desc="Sede Regional Urabá — Carrera 100 #93-24" data-cx="148" data-cy="208.6" transform="translate(148, 208.6)">
+      <!-- 50px Invisible hit target -->
+      <circle cx="0" cy="0" r="28" class="hit-area" />
+      <circle cx="0" cy="0" r="14" fill="none" stroke="#cc0000" class="marker-pulse-sede" />
+      <circle cx="0" cy="0" r="6" fill="#cc0000" class="marker-circle-inner" filter="url(#glow-red-node)" />
+      <circle cx="0" cy="0" r="2.5" fill="#ffffff" style="pointer-events:none" />
+    </g>
+    <!-- Dept Antioquia -->
+    <g class="map-marker-item map-node-dept" data-id="antioquia" data-name="Antioquia" data-category="Departamento Activo" data-desc="Operación fija, móvil y monitoreo electrónico" data-cx="207.7" data-cy="245.9" transform="translate(207.7, 245.9)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Cundinamarca -->
+    <g class="map-marker-item map-node-dept" data-id="cundinamarca" data-name="Cundinamarca" data-category="Departamento Activo" data-desc="Cobertura industrial, comercial y residencial" data-cx="266.5" data-cy="314" transform="translate(266.5, 314)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Atlántico -->
+    <g class="map-marker-item map-node-dept" data-id="atlantico" data-name="Atlántico" data-category="Departamento Activo" data-desc="Seguridad portuaria, comercial e industrial" data-cx="220.3" data-cy="102" transform="translate(220.3, 102)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Cartagena / Bolívar -->
+    <g class="map-marker-item map-node-dept" data-id="bolivar" data-name="Cartagena / Bolívar" data-category="Departamento Activo" data-desc="Vigilancia en infraestructura y sector marítimo" data-cx="199.4" data-cy="136" transform="translate(199.4, 136)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Cali / Valle del Cauca -->
+    <g class="map-marker-item map-node-dept" data-id="valle" data-name="Cali / Valle del Cauca" data-category="Departamento Activo" data-desc="Escoltas y protección a operaciones logísticas" data-cx="161.6" data-cy="363.3" transform="translate(161.6, 363.3)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Yopal / Casanare -->
+    <g class="map-marker-item map-node-dept" data-id="casanare" data-name="Yopal / Casanare" data-category="Departamento Activo" data-desc="Seguridad especializada para sector energético y petróleo" data-cx="341.9" data-cy="306.4" transform="translate(341.9, 306.4)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Villavicencio / Meta -->
+    <g class="map-marker-item map-node-dept" data-id="meta" data-name="Villavicencio / Meta" data-category="Departamento Activo" data-desc="Protección a instalaciones agroindustriales y energía" data-cx="287.4" data-cy="374.6" transform="translate(287.4, 374.6)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Tunja / Boyacá -->
+    <g class="map-marker-item map-node-dept" data-id="boyaca" data-name="Tunja / Boyacá" data-category="Departamento Activo" data-desc="Servicios de seguridad física y electrónica" data-cx="295.8" data-cy="287.5" transform="translate(295.8, 287.5)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Riohacha / La Guajira -->
+    <g class="map-marker-item map-node-dept" data-id="guajira" data-name="Riohacha / La Guajira" data-category="Departamento Activo" data-desc="Seguridad en proyectos energéticos y minería" data-cx="321" data-cy="71.7" transform="translate(321, 71.7)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Santa Marta / Magdalena -->
+    <g class="map-marker-item map-node-dept" data-id="magdalena" data-name="Santa Marta / Magdalena" data-category="Departamento Activo" data-desc="Cobertura logística y puertos marítimos" data-cx="249.7" data-cy="120.9" transform="translate(249.7, 120.9)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Valledupar / Cesar -->
+    <g class="map-marker-item map-node-dept" data-id="cesar" data-name="Valledupar / Cesar" data-category="Departamento Activo" data-desc="Vigilancia en operaciones industriales y transporte" data-cx="279" data-cy="136" transform="translate(279, 136)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Ibagué / Tolima -->
+    <g class="map-marker-item map-node-dept" data-id="tolima" data-name="Ibagué / Tolima" data-category="Departamento Activo" data-desc="Seguridad para sector servicios y comercio" data-cx="207.7" data-cy="344.3" transform="translate(207.7, 344.3)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Pereira / Risaralda -->
+    <g class="map-marker-item map-node-dept" data-id="risaralda" data-name="Pereira / Risaralda" data-category="Departamento Activo" data-desc="Protección de centros logísticos en Eje Cafetero" data-cx="186.8" data-cy="325.4" transform="translate(186.8, 325.4)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Armenia / Quindío -->
+    <g class="map-marker-item map-node-dept" data-id="quindio" data-name="Armenia / Quindío" data-category="Departamento Activo" data-desc="Vigilancia urbana y sector agroindustrial" data-cx="186.8" data-cy="336.7" transform="translate(186.8, 336.7)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+    <!-- Dept Sincelejo / Sucre -->
+    <g class="map-marker-item map-node-dept" data-id="sucre" data-name="Sincelejo / Sucre" data-category="Departamento Activo" data-desc="Monitoreo y protección de activos" data-cx="203.5" data-cy="158.8" transform="translate(203.5, 158.8)">
+      <!-- 44px Invisible hit target -->
+      <circle cx="0" cy="0" r="22" class="hit-area" />
+      <circle cx="0" cy="0" r="9" fill="none" stroke="#cc0000" class="marker-pulse-ring" />
+      <circle cx="0" cy="0" r="4.5" fill="#cc0000" class="marker-circle-inner" />
+    </g>
+  </g>
+</svg>
