@@ -317,7 +317,6 @@ section{position:relative;}
 .card::before{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--color-primary);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease);}
 .card:hover{transform:translateY(-6px);border-color:var(--color-border);box-shadow:var(--shadow-md);}
 .card:hover::before{transform:scaleX(1);}
-.card.in::before,.card.is-visible::before{transform:scaleX(1);}
 .card.on-light{background:#fff;border-color:var(--line-light);}
 .card.on-gray{background:#fff;border-color:var(--line-light);}
 
@@ -867,3 +866,136 @@ section{position:relative;}
 @media (prefers-reduced-motion:reduce){
   [data-animate]{opacity:1;transform:none;transition:none;}
 }
+
+/* ---------- Policy & Legal Pages Hero (Image 0 match) ---------- */
+.hero-policy{
+  position:relative;
+  padding-top:140px;
+  padding-bottom:90px;
+  background-color:#f6f8fa;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.06) 1.5px, transparent 1.5px),
+    linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size:24px 24px, 16px 16px, 16px 16px;
+  color:#1a1a1a;
+  text-align:center;
+  overflow:hidden;
+  border-bottom:1px solid var(--line-light);
+}
+.hero-policy .wrap{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.hero-policy h1{
+  font-size:clamp(2.2rem, 4.8vw, 3.6rem);
+  color:#1a1a1a;
+  margin-block:14px 18px;
+  letter-spacing:-0.03em;
+  font-weight:700;
+}
+.hero-policy .lead{
+  font-size:clamp(1rem, 1.4vw, 1.2rem);
+  color:var(--muted-dark);
+  max-width:68ch;
+}
+.hero-policy .eyebrow{
+  color:var(--color-primary);
+  border-left-color:var(--color-primary);
+}
+.hero-policy-wave{
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  overflow:hidden;
+  line-height:0;
+}
+.hero-policy-wave svg{
+  position:relative;
+  display:block;
+  width:100%;
+  height:40px;
+}
+
+/* ---------- Legal & Policy Document Styles ---------- */
+.policy-doc{
+  background:#fff;
+  border:1px solid var(--line-light);
+  border-radius:var(--r-md);
+  padding:clamp(28px, 4vw, 56px);
+  color:var(--color-text-dark);
+  box-shadow:0 4px 20px rgba(0,0,0,0.03);
+}
+.policy-doc p{
+  margin-bottom:18px;
+  font-size:1.02rem;
+  line-height:1.75;
+  color:#333333;
+}
+.policy-doc h2,.policy-doc h3{
+  color:var(--color-text-dark);
+  margin-top:32px;
+  margin-bottom:16px;
+}
+.policy-doc ul{
+  margin-bottom:24px;
+  padding-left:24px;
+}
+.policy-doc li{
+  margin-bottom:10px;
+  font-size:1rem;
+  color:#333333;
+  line-height:1.65;
+}
+.highlight-box{
+  background:rgba(204,0,0,0.04);
+  border-left:4px solid var(--color-primary);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:20px 24px;
+  margin-bottom:28px;
+}
+.highlight-box p{
+  margin-bottom:0;
+  font-weight:600;
+  color:#111111;
+  font-size:1.04rem;
+}
+.sig-card{
+  margin-top:40px;
+  padding-top:24px;
+  border-top:2px dashed var(--line-light);
+  display:inline-block;
+}
+.sig-card .sig-name{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:1.15rem;
+  color:var(--color-text-dark);
+}
+.sig-card .sig-role{
+  font-size:.9rem;
+  color:var(--color-primary);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+/* Form Ethics Line */
+.form-section-title{
+  color:var(--color-primary);
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(1.2rem, 2.2vw, 1.5rem);
+  margin-block:32px 20px;
+}
+.form-hint{
+  font-size:.88rem;
+  color:var(--muted-dark);
+  margin-bottom:16px;
+  font-style:italic;
+}
+

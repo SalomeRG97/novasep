@@ -1,76 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.novaseguridad.com.co/</loc>
-    <lastmod>2026-07-08</lastmod>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/servicios.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/servicios</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/contacto.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/contacto</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/quienes-somos.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/quienes-somos</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/sectores.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/sectores</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/certificaciones.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/certificaciones</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.novaseguridad.com.co/trabaja</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/trabaja.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/linea-etica</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/srv-vigilancia-humana.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/srv-vigilancia-humana</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/srv-escoltas.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/srv-escoltas</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/srv-drones.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/srv-drones</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/srv-seguridad-electronica.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/srv-seguridad-electronica</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.novaseguridad.com.co/srv-analisis-riesgos.html</loc>
-    <lastmod>2026-07-08</lastmod>
+    <loc>https://www.novaseguridad.com.co/srv-analisis-riesgos</loc>
+    <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.novaseguridad.com.co/declaracion-conformidad</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.novaseguridad.com.co/politica-gestion-integral</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.novaseguridad.com.co/politica-privacidad</loc>
+    <lastmod>2026-08-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

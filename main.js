@@ -66,14 +66,14 @@
   /* ---------- Shared data ---------- */
   var WA = 'https://wa.me/573207873338';
   var NAV = [
-    { id: 'inicio', label: 'Inicio', href: 'index.html' },
-    { id: 'servicios', label: 'Servicios', href: 'servicios.html' },
-    { id: 'sectores', label: 'Sectores', href: 'sectores.html' },
-    { id: 'certificaciones', label: 'Certificaciones', href: 'certificaciones.html' },
-    { id: 'quienes-somos', label: 'Quiénes somos', href: 'quienes-somos.html' },
-    { id: 'trabaja', label: 'Trabaja con nosotros', href: 'trabaja.html' }
+    { id: 'inicio', label: 'Inicio', href: '/' },
+    { id: 'servicios', label: 'Servicios', href: '/servicios' },
+    { id: 'sectores', label: 'Sectores', href: '/sectores' },
+    { id: 'certificaciones', label: 'Certificaciones', href: '/certificaciones' },
+    { id: 'quienes-somos', label: 'Quiénes somos', href: '/quienes-somos' },
+    { id: 'trabaja', label: 'Trabaja con nosotros', href: '/trabaja' }
   ];
-  var BRAND = '<a class="brand" href="index.html" aria-label="NOVASEP — Inicio">' +
+  var BRAND = '<a class="brand" href="/" aria-label="NOVASEP — Inicio">' +
     '<img src="media/logo.png" alt="NOVASEP — Innovación en Seguridad" class="brand-logo brand-logo-light" width="160" height="40" loading="eager">' +
     '<img src="media/logo negro.png" alt="NOVASEP — Innovación en Seguridad" class="brand-logo brand-logo-dark" width="160" height="40" loading="eager">' +
     '</a>';
@@ -89,7 +89,7 @@
       '<div class="wrap nav">' + BRAND +
       '<nav aria-label="Principal"><ul class="nav-links">' + links + '</ul></nav>' +
       '<div class="nav-cta">' +
-      '<a class="btn btn-primary" href="contacto.html">Cotizar ' + icon('arrowRight') + '</a>' +
+      '<a class="btn btn-primary" href="/contacto">Cotizar ' + icon('arrowRight') + '</a>' +
       '<button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>' +
       '</div></div>';
 
@@ -100,9 +100,9 @@
       NAV.map(function (n) {
         return '<a href="' + n.href + '"' + (n.id === active ? ' class="active"' : '') + '>' + n.label + icon('arrowRight') + '</a>';
       }).join('') +
-      '<a class="btn btn-primary btn-lg" href="contacto.html" style="justify-content:center">Cotizar ahora</a>' +
+      '<a class="btn btn-primary btn-lg" href="/contacto" style="justify-content:center">Cotizar ahora</a>' +
       '<div class="mm-contact">+57 604 448 40 52<br><a href="' + WA + '">WhatsApp: +57 320 787 3338</a><br>' +
-      '<a href="mailto:servicioalcliente@novaseguridad.com.co">servicioalcliente@novaseguridad.com.co</a></div>';
+      '<a href="mailto:comercial@novaseguridad.com.co">comercial@novaseguridad.com.co</a></div>';
 
     document.body.insertBefore(header, document.body.firstChild);
     document.body.appendChild(drawer);
@@ -135,32 +135,32 @@
       '<div class="footer-grid">' +
       '<div class="footer-brand">' + BRAND +
       '<p>Empresa de seguridad privada con presencia nacional. Vigilancia humana, tecnología e innovación al servicio de sus operaciones.</p>' +
-      '<div class="f-contact"><a href="mailto:servicioalcliente@novaseguridad.com.co">servicioalcliente@novaseguridad.com.co</a><br>' +
+      '<div class="f-contact"><a href="mailto:comercial@novaseguridad.com.co">comercial@novaseguridad.com.co</a><br>' +
       '<a href="tel:+576044484052">+57 604 448 40 52</a> · <a href="' + WA + '">+57 320 787 3338</a></div>' +
       '<div class="f-soc">' +
       '<a href="https://www.facebook.com/Novasep.Seguridad/?locale=es_LA" target="_blank" rel="noopener" aria-label="Facebook">' + icon('facebook') + '</a>' +
       '<a href="https://co.linkedin.com/company/nova-seguridad-privada-limitada" target="_blank" rel="noopener" aria-label="LinkedIn">' + icon('linkedin') + '</a>' +
       '<a href="https://www.instagram.com/novasep.seguridad/?hl=es" target="_blank" rel="noopener" aria-label="Instagram">' + icon('instagram') + '</a></div></div>' +
       '<div class="f-col"><h4>Servicios</h4><ul>' +
-      '<li><a href="srv-vigilancia-humana.html">Vigilancia humana</a></li>' +
-      '<li><a href="srv-escoltas.html">Escoltas</a></li>' +
-      '<li><a href="srv-drones.html">Drones de seguridad</a></li>' +
-      '<li><a href="srv-seguridad-electronica.html">Seguridad electrónica</a></li>' +
-      '<li><a href="srv-analisis-riesgos.html">Análisis de riesgos</a></li></ul></div>' +
+      '<li><a href="/srv-vigilancia-humana">Vigilancia Física</a></li>' +
+      '<li><a href="/srv-escoltas">Escoltas</a></li>' +
+      '<li><a href="/srv-drones">Vigilancia Aérea</a></li>' +
+      '<li><a href="/srv-seguridad-electronica">Seguridad electrónica</a></li>' +
+      '<li><a href="/srv-analisis-riesgos">Análisis de riesgos</a></li></ul></div>' +
       '<div class="f-col"><h4>Empresa</h4><ul>' +
-      '<li><a href="quienes-somos.html">Quiénes somos</a></li>' +
-      '<li><a href="sectores.html">Sectores</a></li>' +
-      '<li><a href="certificaciones.html">Certificaciones</a></li>' +
-      '<li><a href="trabaja.html">Trabaja con nosotros</a></li>' +
-      '<li><a href="contacto.html">Contacto</a></li></ul></div>' +
-      '<div class="f-col"><h4>Sedes</h4><ul>' +
-      '<li><a href="contacto.html">Medellín — Principal</a></li>' +
-      '<li><a href="contacto.html">Bogotá</a></li>' +
-      '<li><a href="contacto.html">Barranquilla</a></li>' +
-      '<li><a href="contacto.html">Apartadó</a></li></ul></div>' +
+      '<li><a href="/quienes-somos">Quiénes somos</a></li>' +
+      '<li><a href="/sectores">Sectores</a></li>' +
+      '<li><a href="/certificaciones">Certificaciones</a></li>' +
+      '<li><a href="/trabaja">Trabaja con nosotros</a></li>' +
+      '<li><a href="/contacto">Contacto</a></li></ul></div>' +
+      '<div class="f-col"><h4>Políticas y Ética</h4><ul>' +
+      '<li><a href="/linea-etica">Línea Ética</a></li>' +
+      '<li><a href="/declaracion-conformidad">Declaración Conformidad</a></li>' +
+      '<li><a href="/politica-privacidad">Política de Privacidad</a></li>' +
+      '<li><a href="/politica-gestion-integral">Gestión Integral</a></li></ul></div>' +
       '</div>' +
       '<div class="footer-bottom"><p>© ' + new Date().getFullYear() + ' Nova Seguridad Privada Ltda. Todos los derechos reservados.</p>' +
-      '<p><a href="#">Política de privacidad</a> · <a href="#">Términos y condiciones</a></p></div>' +
+      '<p><a href="/politica-privacidad">Política de Privacidad</a> · <a href="/linea-etica">Línea Ética</a> · <a href="/declaracion-conformidad">Declaración de Conformidad</a> · <a href="/politica-gestion-integral">Política de Gestión Integral</a></p></div>' +
       '</div>';
     document.body.appendChild(f);
   }
@@ -203,7 +203,8 @@
     publicKey: 'YOUR_PUBLIC_KEY',                // Clave pública (Public Key) de EmailJS
     serviceId: 'YOUR_SERVICE_ID',                // Service ID (ej: service_novasep)
     templateIdContact: 'YOUR_TEMPLATE_ID_CONTACT', // Template ID para formularios de contacto / cotizaciones
-    templateIdCV: 'YOUR_TEMPLATE_ID_CV'           // Template ID para hojas de vida (Trabaja con nosotros)
+    templateIdCV: 'YOUR_TEMPLATE_ID_CV',           // Template ID para hojas de vida (Trabaja con nosotros)
+    templateIdEtica: 'YOUR_TEMPLATE_ID_ETICA'      // Template ID para reportes de Línea Ética
   };
   window.EMAILJS_CONFIG = EMAILJS_CONFIG;
 
@@ -241,7 +242,11 @@
 
         var type = form.getAttribute('data-emailjs') || (form.getAttribute('aria-label') && form.getAttribute('aria-label').toLowerCase().indexOf('hoja') !== -1 ? 'cv' : 'contact');
         var customTemplate = form.getAttribute('data-emailjs-template');
-        var templateId = customTemplate || (type === 'cv' ? EMAILJS_CONFIG.templateIdCV : EMAILJS_CONFIG.templateIdContact);
+        var templateId = customTemplate || (
+          type === 'cv' ? EMAILJS_CONFIG.templateIdCV :
+          type === 'linea-etica' ? EMAILJS_CONFIG.templateIdEtica :
+          EMAILJS_CONFIG.templateIdContact
+        );
         var serviceId = EMAILJS_CONFIG.serviceId;
         var publicKey = EMAILJS_CONFIG.publicKey;
 
@@ -314,7 +319,7 @@
   }
   function initObservers() {
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var els = [].slice.call(document.querySelectorAll('[data-animate], .reveal'));
+    var els = [].slice.call(document.querySelectorAll('[data-animate], .reveal, [data-count]'));
 
     function runCounters(el) {
       var cs = el.matches('[data-count]') ? [el] : [];
@@ -324,21 +329,7 @@
         c.dataset.done = '1';
         if (reduce) { setFinalCount(c); return; }
         animateCount(c);
-        setTimeout(function () { setFinalCount(c); }, 1700); // failsafe for throttled rAF
       });
-    }
-    function watchdog(el) {
-      // In some embeds/previews the iframe's animation clock is throttled, so the
-      // opacity transition stalls at 0. If it hasn't progressed shortly after being
-      // marked visible, snap to the final state without an animation.
-      setTimeout(function () {
-        if (!el.classList.contains('is-visible')) return;
-        if (parseFloat(getComputedStyle(el).opacity) >= 0.9) return;
-        var prev = el.style.transition;
-        el.style.transition = 'none';
-        void el.offsetHeight; // force reflow → element jumps to final style
-        requestAnimationFrame(function () { el.style.transition = prev; });
-      }, 1000);
     }
     function setState(el, vis) {
       if (vis) {
@@ -346,10 +337,9 @@
           el.classList.add('is-visible');
           el.classList.add('in'); // back-compat with existing .reveal styles
           runCounters(el);
-          watchdog(el);
         }
-      } else if (!el.hasAttribute('data-animate-once')) {
-        // reverse out when scrolled past (either direction)
+      } else if (el.hasAttribute('data-animate-repeat')) {
+        // reverse out only if explicitly configured to repeat
         el.classList.remove('is-visible');
         el.classList.remove('in');
       }
@@ -358,15 +348,15 @@
       var r = el.getBoundingClientRect();
       var vh = window.innerHeight || document.documentElement.clientHeight;
       if (r.height === 0 && r.width === 0) return false;
-      return r.top < vh * 0.85 && r.bottom > vh * 0.15;
+      return r.top < vh * 0.95 && r.bottom > 0;
     }
     function check() { for (var i = 0; i < els.length; i++) setState(els[i], inView(els[i])); }
 
-    // Primary: IntersectionObserver (threshold 0.15) — fires enter & exit
+    // Primary: IntersectionObserver (threshold 0.05) — fires enter
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { setState(e.target, e.isIntersecting); });
-      }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+      }, { threshold: 0.05, rootMargin: '0px 0px -2% 0px' });
       els.forEach(function (el) { io.observe(el); });
     }
     // Fallbacks for embeds where IO / scroll events are throttled

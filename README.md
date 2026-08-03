@@ -105,7 +105,8 @@ var EMAILJS_CONFIG = {
   publicKey: 'TU_PUBLIC_KEY',
   serviceId: 'TU_SERVICE_ID',
   templateIdContact: 'TU_TEMPLATE_CONTACTO',
-  templateIdCV: 'TU_TEMPLATE_CV'
+  templateIdCV: 'TU_TEMPLATE_CV',
+  templateIdEtica: 'TU_TEMPLATE_ETICA'
 };
 ```
 
