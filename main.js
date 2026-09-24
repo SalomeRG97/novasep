@@ -198,84 +198,208 @@
     });
   }
 
-  /* ---------- EmailJS Configuration ---------- */
-  var EMAILJS_CONFIG = {
-    publicKey: 'YOUR_PUBLIC_KEY',                // Clave pública (Public Key) de EmailJS
-    serviceId: 'YOUR_SERVICE_ID',                // Service ID (ej: service_novasep)
-    templateIdContact: 'YOUR_TEMPLATE_ID_CONTACT', // Template ID para formularios de contacto / cotizaciones
-    templateIdCV: 'YOUR_TEMPLATE_ID_CV',           // Template ID para hojas de vida (Trabaja con nosotros)
-    templateIdEtica: 'YOUR_TEMPLATE_ID_ETICA'      // Template ID para reportes de Línea Ética
-  };
-  window.EMAILJS_CONFIG = EMAILJS_CONFIG;
 
-  var emailjsScriptPromise = null;
-  function loadEmailJS() {
-    if (window.emailjs) return Promise.resolve();
-    if (emailjsScriptPromise) return emailjsScriptPromise;
-    emailjsScriptPromise = new Promise(function (resolve, reject) {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-      script.async = true;
-      script.onload = function () {
-        if (window.emailjs && EMAILJS_CONFIG.publicKey && EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY') {
-          try { window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey }); } catch (err) {}
+  /* ---------- CRM — Envío de formularios a Simla via backend PHP ---------- */
+
+  /**
+   * Recopila todos los campos de un formulario en un FormData,
+   * agrega form_type y lo envía a api/crm-handler.php via fetch().
+   * Devuelve una Promise que resuelve con la respuesta JSON del servidor.
+   */
+  function enviarAlCRM(form, formType) {
+    var data = new FormData(form);
+    data.append('form_type', formType);
+    data.append('origen_pagina', window.location.pathname);
+
+    return fetch('/api/crm-handler.php', {
+      method: 'POST',
+      body: data
+    })
+    .then(function (res) {
+      // Intentar parsear siempre como JSON; si el servidor devuelve HTML (error 500), capturar
+      return res.text().then(function (text) {
+        try { return JSON.parse(text); }
+        catch (e) {
+          console.error('Respuesta no JSON del servidor:', text);
+          return { success: false, error: 'Error inesperado del servidor.' };
         }
-        resolve();
-      };
-      script.onerror = function (err) {
-        emailjsScriptPromise = null;
-        reject(err);
-      };
-      document.head.appendChild(script);
-    });
-    return emailjsScriptPromise;
-  }
-
-  /* ---------- Form submission (EmailJS) ---------- */
-  function initForms() {
-    var forms = document.querySelectorAll('form[data-emailjs], form[data-formspree]');
-    forms.forEach(function (form) {
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var btn = form.querySelector('[type="submit"]');
-        if (!btn || btn.disabled) return;
-
-        var type = form.getAttribute('data-emailjs') || (form.getAttribute('aria-label') && form.getAttribute('aria-label').toLowerCase().indexOf('hoja') !== -1 ? 'cv' : 'contact');
-        var customTemplate = form.getAttribute('data-emailjs-template');
-        var templateId = customTemplate || (
-          type === 'cv' ? EMAILJS_CONFIG.templateIdCV :
-          type === 'linea-etica' ? EMAILJS_CONFIG.templateIdEtica :
-          EMAILJS_CONFIG.templateIdContact
-        );
-        var serviceId = EMAILJS_CONFIG.serviceId;
-        var publicKey = EMAILJS_CONFIG.publicKey;
-
-        if (!publicKey || publicKey === 'YOUR_PUBLIC_KEY' || !serviceId || serviceId === 'YOUR_SERVICE_ID' || !templateId || templateId.indexOf('YOUR_TEMPLATE') === 0) {
-          alert('EmailJS aún no ha sido configurado con sus claves.\n\nPor favor abra main.js y reemplace EMAILJS_CONFIG con su Public Key, Service ID y Template ID de EmailJS.');
-          return;
-        }
-
-        var origHTML = btn.innerHTML;
-        btn.innerHTML = 'Enviando…';
-        btn.disabled = true;
-
-        loadEmailJS().then(function () {
-          return emailjs.sendForm(serviceId, templateId, form, publicKey);
-        })
-        .then(function (r) {
-          form.reset();
-          btn.innerHTML = '✓ Enviado correctamente';
-          setTimeout(function () { btn.innerHTML = origHTML; btn.disabled = false; }, 4000);
-        })
-        .catch(function (err) {
-          console.error('Error al enviar formulario con EmailJS:', err);
-          btn.innerHTML = '✕ Error al enviar, intente de nuevo';
-          btn.disabled = false;
-          setTimeout(function () { btn.innerHTML = origHTML; }, 3500);
-        });
       });
     });
   }
+
+  /**
+   * Actualiza el botón de envío mientras se procesa / termina la petición.
+   */
+  function setBtnState(btn, origHTML, estado) {
+    if (estado === 'loading') {
+      btn.innerHTML = 'Enviando…';
+      btn.disabled  = true;
+    } else if (estado === 'ok') {
+      btn.innerHTML = '✓ Enviado correctamente';
+      setTimeout(function () { btn.innerHTML = origHTML; btn.disabled = false; }, 4000);
+    } else { // error
+      btn.disabled  = false;
+      setTimeout(function () { btn.innerHTML = origHTML; }, 3500);
+    }
+  }
+
+  /* ---------- Form — Cotización Comercial (contacto.html) ---------- */
+  function initFormCotizacion() {
+    var form = document.querySelector('form[data-emailjs="contact"]');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn      = form.querySelector('[type="submit"]');
+      var origHTML = btn.innerHTML;
+      setBtnState(btn, origHTML, 'loading');
+
+      enviarAlCRM(form, 'cotizacion')
+        .then(function (res) {
+          if (res.success) {
+            form.reset();
+            setBtnState(btn, origHTML, 'ok');
+          } else {
+            btn.innerHTML = '✕ ' + (res.error || 'Error al enviar. Intente de nuevo.');
+            setBtnState(btn, origHTML, 'error');
+          }
+        })
+        .catch(function (err) {
+          console.error('Error de red al enviar cotización:', err);
+          btn.innerHTML = '✕ Error de conexión. Intente de nuevo.';
+          setBtnState(btn, origHTML, 'error');
+        });
+    });
+  }
+
+  /* ---------- Form — Línea Ética (linea-etica.html) ---------- */
+  function initFormEtica() {
+    // El formulario de línea ética no tiene data-emailjs; lo identificamos por el botón de envío
+    var form = document.querySelector('form[aria-label="Línea Ética"], form:has(button[type="submit"])');
+
+    // Buscar de forma más robusta: cualquier form en páginas con data-page="linea-etica"
+    if (!form || document.body.getAttribute('data-page') !== 'linea-etica') {
+      // Buscar por el campo específico del formulario de ética
+      var campoEtica = document.querySelector('[name="categoria_caso"]');
+      if (!campoEtica) return;
+      form = campoEtica.closest('form');
+      if (!form) return;
+    }
+
+    // Lógica de visibilidad: mostrar/ocultar campos de identidad según anonimato
+    var selectAnonimo   = form.querySelector('[name="reporte_anonimo"]');
+    var camposNoAnonimo = document.getElementById('no-anonimo-fields');
+
+    function actualizarVisibilidad() {
+      if (!selectAnonimo || !camposNoAnonimo) return;
+      var esAnonimo = selectAnonimo.value === 'Si';
+      camposNoAnonimo.style.display = esAnonimo ? 'none' : '';
+      // Si es anónimo, quitar required de los campos ocultos
+      camposNoAnonimo.querySelectorAll('input, select, textarea').forEach(function (el) {
+        el.required = false;
+      });
+    }
+
+    if (selectAnonimo) {
+      selectAnonimo.addEventListener('change', actualizarVisibilidad);
+      actualizarVisibilidad(); // estado inicial (por defecto Sí está seleccionado)
+    }
+
+    // Lógica subcategoría DDHH: solo visible si categoría = vulneración DDHH
+    var selectCategoria    = form.querySelector('[name="categoria_caso"]');
+    var selectSubcategoria = form.querySelector('[name="subcategoria_ddhh"]');
+    var wrapSubcat         = selectSubcategoria ? selectSubcategoria.closest('.field') : null;
+
+    function actualizarSubcategoria() {
+      if (!selectCategoria || !wrapSubcat) return;
+      var esDDHH = selectCategoria.value === 'Violación o vulneración de derechos humanos.';
+      wrapSubcat.style.display = esDDHH ? '' : 'none';
+      if (!esDDHH && selectSubcategoria) selectSubcategoria.value = '';
+    }
+
+    if (selectCategoria) {
+      selectCategoria.addEventListener('change', actualizarSubcategoria);
+      actualizarSubcategoria(); // estado inicial
+    }
+
+    // Envío del formulario
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn      = form.querySelector('[type="submit"]');
+      var origHTML = btn.innerHTML;
+      setBtnState(btn, origHTML, 'loading');
+
+      enviarAlCRM(form, 'etica')
+        .then(function (res) {
+          if (res.success) {
+            form.reset();
+            actualizarVisibilidad();
+            actualizarSubcategoria();
+            setBtnState(btn, origHTML, 'ok');
+          } else {
+            btn.innerHTML = '✕ ' + (res.error || 'Error al enviar. Intente de nuevo.');
+            setBtnState(btn, origHTML, 'error');
+          }
+        })
+        .catch(function (err) {
+          console.error('Error de red al enviar reporte ética:', err);
+          btn.innerHTML = '✕ Error de conexión. Intente de nuevo.';
+          setBtnState(btn, origHTML, 'error');
+        });
+    });
+  }
+
+  /* ---------- Form — Trabaja con Nosotros (trabaja.html) ---------- */
+  function initFormTrabaja() {
+    var form = document.querySelector('form[data-emailjs="cv"]');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn      = form.querySelector('[type="submit"]');
+      var origHTML = btn.innerHTML;
+      setBtnState(btn, origHTML, 'loading');
+
+      // FormData captura automáticamente el archivo adjunto (cv_file)
+      var data = new FormData(form);
+
+      fetch('/api/mail-handler.php', {
+        method: 'POST',
+        body: data
+      })
+      .then(function (res) {
+        return res.text().then(function (text) {
+          try { return JSON.parse(text); }
+          catch (e) {
+            console.error('Respuesta no JSON del servidor:', text);
+            return { success: false, error: 'Error inesperado del servidor.' };
+          }
+        });
+      })
+      .then(function (res) {
+        if (res.success) {
+          form.reset();
+          setBtnState(btn, origHTML, 'ok');
+        } else {
+          btn.innerHTML = '✕ ' + (res.error || 'Error al enviar. Intente de nuevo.');
+          setBtnState(btn, origHTML, 'error');
+        }
+      })
+      .catch(function (err) {
+        console.error('Error de red al enviar hoja de vida:', err);
+        btn.innerHTML = '✕ Error de conexión. Intente de nuevo.';
+        setBtnState(btn, origHTML, 'error');
+      });
+    });
+  }
+
+  function initForms() {
+    initFormCotizacion();
+    initFormEtica();
+    initFormTrabaja();
+  }
+
+
 
   /* ---------- File size validation (5 MB) ---------- */
   function initFileValidation() {

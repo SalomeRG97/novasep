@@ -1,0 +1,8 @@
+﻿# Impide que se listen los archivos del directorio
+Options -Indexes
+
+# Bloquea acceso directo a los archivos de log
+<FilesMatch "^(crm_errors|mail_errors)\.log$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
